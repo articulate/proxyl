@@ -1,18 +1,25 @@
-#!/usr/bin/env nodemon
+#!/usr/bin/env node
 
-const { compose } = require('ramda')
-const http = require('http')
-const { mount } = require('paperplane')
+const { append, curryN, map } = require('ramda')
+const logger = require('nodemon/lib/utils/log')
+const path = require('path')
+const program = require('commander')
 
-const requestToEvent = require('./requestToEvent')
+const log = ({ type, message }) =>
+  logger[type](message)
 
-const [ path, name ] = process.argv[2].split('.')
-console.log(`Loading handler \`${name}\` from ${path}.js`)
+const resolve =
+  curryN(2, path.resolve)(process.cwd())
 
-const handlerPath = require.resolve(path, { paths: [ process.cwd() ] })
-const handler = require(handlerPath)[name]
+program
+  .usage('[options] path/to/file.handlerName')
+  .option('-w, --watch <path>', 'Path to watch, defaults to pwd', append, [])
+  .parse(process.argv)
 
-const app = compose(handler, requestToEvent)
-const noop = Function.prototype
+const watch = program.watch.length ? program.watch : ['.']
 
-http.createServer(mount({ app, cry: noop, logger: noop })).listen(3000)
+require('nodemon')({
+  execArgs: program.args,
+  script: require.resolve('./proxyl'),
+  watch: map(resolve, watch)
+}).on('log', log)
