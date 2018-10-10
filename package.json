@@ -1,7 +1,8 @@
 {
   "name": "proxyl",
   "version": "0.0.0",
-  "description": "Dev server for AWS API Gateway Lambda Proxy services",
+  "description": "AWS API Gateway Lambda Proxy service dev server",
+  "repository": "git@github.com:articulate/proxyl",
   "main": "src/index.js",
   "bin": "src/index.js",
   "author": "articulate",
