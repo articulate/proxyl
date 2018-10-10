@@ -1,12 +1,8 @@
 #!/usr/bin/env node
 
-const { append, curryN, map } = require('ramda')
-const logger = require('nodemon/lib/utils/log')
+const { append, curryN, flatten, map, pair, pipe } = require('ramda')
 const path = require('path')
 const program = require('commander')
-
-const log = ({ type, message }) =>
-  logger[type](message)
 
 const resolve =
   curryN(2, path.resolve)(process.cwd())
@@ -18,8 +14,19 @@ program
 
 const watch = program.watch.length ? program.watch : ['.']
 
-require('nodemon')({
-  execArgs: program.args,
-  script: require.resolve('./proxyl'),
-  watch: map(resolve, watch)
-}).on('log', log)
+const args =
+  pipe(
+    map(pipe(
+      resolve,
+      pair('-w')
+    )),
+    flatten,
+    append(require.resolve('./proxyl')),
+    append(program.args),
+    flatten
+  )(watch)
+
+const nodemon = require('child_process').spawn('nodemon', args)
+
+nodemon.stderr.pipe(process.stderr)
+nodemon.stdout.pipe(process.stdout)
