@@ -9,7 +9,8 @@ const resolve =
 
 program
   .usage('[options] path/to/file.handlerName')
-  .option('-w, --watch <path>', 'Path to watch, defaults to pwd', append, [])
+  .option('-p, --port <port>', 'Port to listen on', 3000)
+  .option('-w, --watch <path>', 'Path(s) to watch, defaults to pwd', append, [])
   .parse(process.argv)
 
 const watch = program.watch.length ? program.watch : ['.']
@@ -23,6 +24,7 @@ const args =
     flatten,
     append(require.resolve('./proxyl')),
     append(program.args),
+    append(program.port),
     flatten
   )(watch)
 
