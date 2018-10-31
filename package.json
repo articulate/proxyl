@@ -14,7 +14,7 @@
     "@articulate/funky": "^1.4.1",
     "commander": "^2.19.0",
     "nodemon": "^1.18.4",
-    "paperplane": "^2.0.2",
+    "paperplane": "articulate/paperplane#lambda",
     "ramda": "^0.25.0"
   },
   "devDependencies": {
