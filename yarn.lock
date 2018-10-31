@@ -2,10 +2,17 @@
 # yarn lockfile v1
 
 
-"@articulate/funky@^1.3.0", "@articulate/funky@^1.3.1":
+"@articulate/funky@^1.3.0":
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/@articulate/funky/-/funky-1.3.1.tgz#7b9463f9163fd00938d372267988bbfab89b4e91"
   integrity sha512-wGxCKB8FSyc09jlkfYpaoTmhtPo6weF4jELQI3dHElkIp82jKm1VPzkBAsD0a5jWu8cJQV6QYACIHvMArR5IqQ==
+  dependencies:
+    ramda "^0.25.0"
+
+"@articulate/funky@^1.4.1":
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/@articulate/funky/-/funky-1.4.1.tgz#fe322e03bc4d99ce18aae43886e6e5e7a2b1ba1f"
+  integrity sha512-0uYeFnf34Mo/keARqTiq4V3ekC8+nQGKoZDON+xHNOlWOjfZboF9VJD3l4lGRfloBeVOUgyADL2ZmJf7hk/D+g==
   dependencies:
     ramda "^0.25.0"
 
