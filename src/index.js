@@ -22,7 +22,6 @@ const args =
       resolve,
       pair('-w')
     )),
-    // flatten,
     append([
       require.resolve('./proxyl'),
       program.port,
