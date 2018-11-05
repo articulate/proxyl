@@ -1,21 +1,30 @@
-const { compose } = require('ramda')
+const { composeP } = require('ramda')
 const http = require('http')
 const { mount } = require('paperplane')
+const { resolve } = require('@articulate/funky')
 
+const authWith       = require('./authWith')
 const requestToEvent = require('./requestToEvent')
+const requireLocal   = require('./requireLocal')
 
-const [ path, name ] = process.argv[2].split('.')
-const port = Number(process.argv[3])
+const port = Number(process.argv[2])
 
-const handlerPath = require.resolve(path, { paths: [ process.cwd() ] })
-const handler = require(handlerPath)[name]
+const [ handlerPath, handlerName ] = process.argv[3].split('.')
+const handler = requireLocal(handlerPath)[handlerName]
 
-const app = compose(handler, requestToEvent)
+let authorizer = resolve
+
+if (process.argv[4]) {
+  const [ authPath, authName ] = process.argv[4].split('.')
+  authorizer = authWith(requireLocal(authPath)[authName])
+}
+
+const app  = composeP(handler, requestToEvent, authorizer)
 const noop = Function.prototype
 
 const listening = err => {
   if (err) console.error(err)
-  else console.log(`Serving handler \`${name}\` from ${path}.js on port ${port}`)
+  else console.log(`Serving handler \`${handlerName}\` from ${handlerPath}.js on port ${port}`)
 }
 
 http.createServer(mount({ app, cry: noop, logger: noop }))
