@@ -1770,9 +1770,10 @@ package-json@^4.0.0:
     registry-url "^3.0.3"
     semver "^5.1.0"
 
-paperplane@articulate/paperplane#lambda:
-  version "2.0.2"
-  resolved "https://codeload.github.com/articulate/paperplane/tar.gz/e04c8dbe24479d53b4a526b05d40a62de3ae51c3"
+paperplane@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/paperplane/-/paperplane-2.1.0.tgz#42ae32d3079d2af9e3aa0e21bf187023197d4f14"
+  integrity sha512-BU2dTdS9SNxRHN9w/muESS+nCfM9tu86rT6qv4NjWa/po/F8qYckuRCmp6d3N9IhTtSU0ROpa+Sg5Dmm3Aab6g==
   dependencies:
     "@articulate/funky" "^1.4.1"
     boom "^5.1.0"
