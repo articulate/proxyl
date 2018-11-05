@@ -12,7 +12,7 @@ Lifts your Lambda function into a web server that mimics the request/response fo
 Usage: proxyl [options] path/to/file.handlerName
 
 Options:
-  -a, --auth <authorizer>  path/to/authorizer.handlerName
+  -a, --auth <authorizer>  path/to/authorizer.handlerName (default: "")
   -p, --port <port>        Port to listen on (default: 3000)
   -w, --watch <path>       Path(s) to watch, defaults to pwd (default: [])
   -h, --help               output usage information
