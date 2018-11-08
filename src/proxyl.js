@@ -1,13 +1,13 @@
 const { composeP, evolve, prop, when } = require('ramda')
 const http = require('http')
-const { mount } = require('paperplane')
+const { logger, mount } = require('paperplane')
 const { resolve } = require('@articulate/funky')
 
 const authWith       = require('./authWith')
 const requestToEvent = require('./requestToEvent')
 const requireLocal   = require('./requireLocal')
 
-const noop = Function.prototype
+const noop = logger // Function.prototype
 const port = Number(process.argv[2])
 
 const [ handlerPath, handlerName ] = process.argv[3].split('.')
