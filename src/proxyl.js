@@ -1,13 +1,13 @@
-const { composeP, evolve, prop, tap, when } = require('ramda')
+const { composeP, evolve, prop, when } = require('ramda')
 const http = require('http')
-const { logger, mount } = require('paperplane')
+const { mount } = require('paperplane')
 const { resolve } = require('@articulate/funky')
 
 const authWith       = require('./authWith')
 const requestToEvent = require('./requestToEvent')
 const requireLocal   = require('./requireLocal')
 
-const noop = logger // Function.prototype
+const noop = Function.prototype
 const port = Number(process.argv[2])
 
 const [ handlerPath, handlerName ] = process.argv[3].split('.')
@@ -27,7 +27,7 @@ const decode64 =
   when(prop('isBase64Encoded'), evolve({ body: bufferize }))
 
 const app =
-  composeP(decode64, tap(console.log), handler, requestToEvent, authorizer)
+  composeP(decode64, handler, requestToEvent, authorizer)
 
 const listening = err => {
   if (err) console.error(err)
