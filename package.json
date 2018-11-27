@@ -13,7 +13,7 @@
   "dependencies": {
     "@articulate/funky": "^1.4.1",
     "commander": "^2.19.0",
-    "nodemon": "^1.18.4",
+    "nodemon": "^1.18.7",
     "paperplane": "^2.1.0",
     "ramda": "^0.25.0"
   },
