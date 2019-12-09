@@ -1,9 +1,9 @@
-const { compose, partialRight } = require('ramda')
+const { compose, concat, partialRight } = require('ramda')
 
 const resolveLocal =
   partialRight(require.resolve, [{ paths: [ process.cwd() ] }])
 
 const requireLocal =
-  compose(require, resolveLocal)
+  compose(require, resolveLocal, concat('./'))
 
 module.exports = requireLocal
